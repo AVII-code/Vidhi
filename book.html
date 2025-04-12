@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Ansh | MEOW</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Ansh Special Edition
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>shyd tumhe yaad hi hoga .... how we met ... lol strangers to strangers ... dono dil ke haare huye jinko pyaar chaheiye tha .... starting of the time when we 
+
+        introduced ourselves .... humare me jo bhi cheeze common thi itni saari 😭😭😭❤️ .... i was like itna sab kuch common b/w u and me  and and and the same 
+
+        standards 😂😂 .... we laughed we managed each other by consoling and getting to know each other more perfectly .... ek dusre ko pyaar dia ache se jo kafi speciasl movement tha 😭
+       </p>
+
+          <p>
+            Start Reading... <br />Since we connect on
+            Instagram on April 10th, 2025, ....
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+            It’s incredible to think how, just a few days ago, I didn’t even know you .... and kuch hi din me itna sb special ho gya hum dono ke liye ki mai kya hi btau 😂❤️
+
+            At first, I wasn’t sure how we’d connect, kya baat krni hai ya kaise baat start krni hai 😭 mujhe kisi cheez ka idea tak nahi tha .... but still itne confidentally msg kra maine😂
+
+            and fhr pta chala that u are of my type 🥹
+
+            yo smile , yo eyes , yo hairs , yo kindness , yo cuteness and especially yo voice .... bs mera dil chura lia gya hai 😭 I never expected to meet someone like you ..... 
+
+            Maybe it was destiny, or maybe it was just luck whatever it was, am glad ki i found loving like u in this generation. 😺💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p> 
+            yo beauty .... ab kya hi bolu apke liye .... shyd bhagwaan ji ne bhi mere liye hi itni sundar bnai hai 🌚.... kal wali jo video bheji thi snapchat pe... usme hi mai pighl gya tha 🥹 .... hairs kafi ache hai apke 😭❤️
+
+            Were you crafted as a masterpiece?
+            
+            aisa jaise specially kisi ne mere liye hi banaya hai apko ... ha ofc mere liye hi banaya hai ehehehehehehhe ....  cant imagine how beautiful you are .... 💟
+            
+            The way u talk witth me itss soooo sweet of u ..... cared for me .....  u are perfect in many ways or i say in every way i want 😭😭😭 isse jyada caring ldki ab mujhe kaha mil skti hai or shyd kabhi mil hi ni sakti 
+            
+            Every time I see you, Its reminds me of a song namely Co2 .... my fav song .... best song for u and me ..... ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2> US 💫✨</h2>
+          <p>
+             ik i too have my bad past so as u and i want u to forget that cuzz am now here .... shyd mai utna acha ni but i'll try everything it takes to be witth u and make u special always 
+
+             i dont want anything else in my life but promise me ki u will stop crying abse cuzz i dont want u to cry for some bloody shitty people ..... bro u are special so dont 
+
+             waste yo tears on some shitty kind of yo exs or some people who dont know how to respect you .... mai hu na yaha apke liye ❤️✨ .... i'll take care of u always .... i'll make u happy always .... i'll make u feel special always .... i'll make u feel loved always .... 
+             
+             i'll make u feel like a princess ....  and believe me you are going to be my only one whom i'll be living for  .... 
+            
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            Talking to you has quickly become one of the highlights of my day. Every time I see a message from you .... i replies within a moment cuzzz ego mai nahi rkhta ... and mai khush ho jata hu 
+          
+            after seeing yo txt 🥹 .... no matter kaisa bhi din chal ra ho ... i always get happy talking to u and thats the best part of the day for me atleast 
+            
+            specially jab aap apni pics send krte ho na .... tab toh or bhi acha lgne lgta hai 😭😭❤️ can't tell how much but bohot zyada .... 💕 
+
+            I hope you know how much you mean to me, and how much I appreciate you. You’re a bright spot in my life, and I’m so grateful for you. 💖✨
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+             soooo my wish mhmmm sochne dooooo 🤔💭 ..... lol just kidding 😂 ..... meri ye wish hai ki i want to meet u in person in real life .... the time when we will see each other ... vo alag baat hai ki sharam aa jayegi 😂😂😂
+             
+             and my second wish is that we stay forever no idea how much but jab tak hu bs apka hu ..... don't want to leave u 🥹
+             
+             third wish ..... sb perfect chale ..... mai toh sb cheez perfectly krunga and agr koi glti ho jaye mere se toh bta dena ... mai sb theek kr dunga ❤️✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            You are an inspiration, and I want you to know that I’ll always be here for you, no matter what. If you ever need someone to listen, someone to support you, or just someone to make you smile .... am always there.
+
+            agr kuch glt lage toh jab chahe tab msg kr dena ❤️.
+            
+            Life can be unpredictable, but I hope you never feel alone. Whether it’s a good day or a tough one, I’ll always be here to cheer you on, to remind you how amazing you are.
+            
+            You deserve everything , No matter where life takes us, just know that you’ll always have someone who cares.... someone who's truly into you. 💕
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+            kya apko kisi ne bataya hai ki aap kitne ache lgte ho .....aap har cheez me chahe jo bhi pehno 🌚❤️? It’s not just the clothes ..... its yo beauty that admires 
+
+            mera dill le gye aap or kya chahiye 😭😂❤️.
+
+            u are Absolutely amazing ..... jaise bhi ho bs mere ho .... or kya chahiye apko 🌚 
+            
+            You are not just beautiful—you are extraordinary. 💖✨ 
+
+            
+          </p>
+        </div>
+        <div class="back">
+          <h2>meowwww ✨💖</h2>
+          <p>
+            u are a cute billi for me 😂❤️....just like u said in the morning "HEY CUTU BILLA JI" it was sooo special like i cant explain 
+            
+            how much but still ...... baaki mko na apke sath time spend krna hai bohot saara .... i wanna have my fav snack while talking with u ..... making cute trends with u and cooking for u 
+            
+            .... jitna ho sake utna zyada time spend krna hai and i want you to be comfortable with me like ik this generation that logo se nahi hota but still i want u to be comfortable with me .... 
+            
+            ....  i promise vidhi i'll take care of u ....💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>thoughts abt You🌹❤</h2>
+          <p>
+            I just wanted to take a moment to let you know how much I appreciate you. From the very start, you’ve been someone special for me nowdays chahe peehle alg tha but now I admire more than words can express.
+
+            Meeting you, even for a short time, kaafi acha lgega mujhe .... chahe aap uss wakt mko daant bhi lena toh kuch nhi hoga 😺
+            
+            vaise apki flirting bhi kafi achi hai 🌚 but stilll ....... meri jyada achi hai ehehehe ..... chahe jo krlo .. blush toh aap hi hote ho last me 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>finally shyd aa gya moment 😭❤️ ...... From the moment we started talking, you’ve been on my mind . Your kindness, your beauty, everything about you feels so special to me.
+
+            You make me feel comfortable , my days better, and my past also 😭.
+            
+            I don’t know what the future holds, but I know one thing I’d love to have you by my side. So, here’s my question, straight from me 😺
+            
+            Will you be mine? 😭💖💕
+          
+            if yes then ....... My honour .. i would like to meow something to you in my words 😭😭😭
+            
+            I LOVE YOU VIDHI 🥹❤️
+          </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>❤️VIDHI❤️</h3>
+          <p>
+            By yo Ansh | MEOW <br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😺</div>
+<div class="emoji">💟</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">❤️‍🩹</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
